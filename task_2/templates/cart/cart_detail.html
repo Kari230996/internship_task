@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart.items.all %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.product.price }} RUB</td>
+            <td>{{ item.product.price|multiply:item.quantity }} RUB</td>
+
+            <td>
+                <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>Total: {{ cart.get_total_price }} RUB</p>
+<form action="{% url 'clear_cart' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning">Clear Cart</button>
+</form>
+{% endblock %}
