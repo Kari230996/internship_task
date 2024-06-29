@@ -1,0 +1,31 @@
+<!-- templates/products/subcategory_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Подкатегории{% endblock %}
+
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'category_list' %}">Категории</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ category.name }}</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>Подкатегории</h1>
+<div class="row">
+    {% for subcategory in subcategories %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <img src="{{ subcategory.image.url }}" class="card-img-top" alt="{{ subcategory.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ subcategory.name }}</h5>
+                <a href="{% url 'product_list' subcategory.slug %}" class="btn btn-primary">Просмотр продуктов</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
