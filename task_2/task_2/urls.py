@@ -1,3 +1,5 @@
+# task_2/urls.py
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import (
@@ -9,6 +11,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
 from users import views as user_views
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -20,6 +23,9 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(
         template_name='users/logout.html'), name='logout'),
     path('accounts/', include('users.urls')),
+
+    # Redirect profile URL to home
+    path('accounts/profile/', RedirectView.as_view(url='/', permanent=False)),
 
     # Separate API routes
     path('api/products/', include('products.api_urls')),
