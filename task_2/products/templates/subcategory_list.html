@@ -19,7 +19,7 @@
     {% for subcategory in subcategories %}
     <div class="col-md-4 mb-4">
         <div class="card">
-            <img src="{{ subcategory.image.url }}" class="card-img-top" alt="{{ subcategory.name }}">
+            <img src="{{ subcategory.image.url }}" class="card-img-top product-img" alt="{{ subcategory.name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ subcategory.name }}</h5>
                 <a href="{% url 'product_list' subcategory.slug %}" class="btn btn-primary">Просмотр продуктов</a>
