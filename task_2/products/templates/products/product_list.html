@@ -1,0 +1,49 @@
+<!-- templates/products/product_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Продукты{% endblock %}
+
+{% block breadcrumbs %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'category_list' %}">Категории</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'subcategory_list' subcategory.parent_category.slug %}">{{ subcategory.parent_category.name }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ subcategory.name }}</li>
+    </ol>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>{{ subcategory.name }}</h1>
+<div class="row">
+    {% for product in page_obj %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <img src="{{ product.image_small.url }}" class="card-img-top product-img" alt="{{ product.name }}">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                <div class="mt-auto">
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary">Подробнее</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="pagination">
+    <span class="page-links">
+        {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}
