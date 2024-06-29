@@ -1,4 +1,4 @@
-# task_2/urls.py
+
 
 from django.contrib import admin
 from django.urls import path, include
@@ -24,10 +24,10 @@ urlpatterns = [
         template_name='users/logout.html'), name='logout'),
     path('accounts/', include('users.urls')),
 
-    # Redirect profile URL to home
+
     path('accounts/profile/', RedirectView.as_view(url='/', permanent=False)),
 
-    # Separate API routes
+
     path('api/products/', include('products.api_urls')),
     path('api/cart/', include('cart.api_urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
