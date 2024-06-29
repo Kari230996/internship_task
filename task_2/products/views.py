@@ -1,4 +1,3 @@
-# products/views.py
 
 from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, permissions
@@ -10,11 +9,13 @@ from django.core.paginator import Paginator
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class SubCategoryViewSet(viewsets.ModelViewSet):
     queryset = SubCategory.objects.all()
     serializer_class = SubCategorySerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class ProductViewSet(viewsets.ModelViewSet):

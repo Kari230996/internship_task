@@ -8,13 +8,12 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from django.utils.decorators import method_decorator
-
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from rest_framework.permissions import IsAuthenticated
 
 
 class CartView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         cart, created = Cart.objects.get_or_create(user=request.user)
         serializer = CartSerializer(cart)
@@ -37,6 +36,8 @@ class CartView(APIView):
 
 
 class CartItemView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def delete(self, request, pk):
         try:
             cart_item = get_object_or_404(

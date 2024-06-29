@@ -1,4 +1,3 @@
-<!-- templates/products/product_list.html -->
 {% extends 'base.html' %}
 
 {% block title %}Продукты{% endblock %}
@@ -8,7 +7,8 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{% url 'home' %}">Главная</a></li>
         <li class="breadcrumb-item"><a href="{% url 'category_list' %}">Категории</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'subcategory_list' subcategory.parent_category.slug %}">{{ subcategory.parent_category.name }}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'subcategory_list' subcategory.parent_category.slug %}">{{
+                subcategory.parent_category.name }}</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ subcategory.name }}</li>
     </ol>
 </nav>
